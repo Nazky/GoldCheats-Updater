@@ -18,6 +18,11 @@ Public Class Form1
         Else
             Directory.CreateDirectory(Application.StartupPath & "/json")
         End If
+
+        If My.Settings.IP = "" Then
+        Else
+            TextBox1.Text = My.Settings.IP
+        End If
     End Sub
 
     Sub updatecheats()
@@ -112,7 +117,7 @@ Public Class Form1
 
             Dim di As New DirectoryInfo(Application.StartupPath & "/kmeps4/PS4OfflineTrainer-main")
 
-            For Each fi As FileInfo In di.EnumerateFiles("*.json*")
+            For Each fi As FileInfo In di.EnumerateFiles("*.json")
                 System.IO.File.Copy(fi.FullName, Application.StartupPath & "\json\" & fi.Name, True)
             Next
 
@@ -136,7 +141,7 @@ Public Class Form1
         Try
             Dim di As New DirectoryInfo(Application.StartupPath & "/json")
 
-            For Each fi As FileInfo In di.EnumerateFiles("*.json*")
+            For Each fi As FileInfo In di.EnumerateFiles("*.json")
                 System.IO.File.Delete(Application.StartupPath & "\json\" & fi.Name)
             Next
 
@@ -150,5 +155,49 @@ Public Class Form1
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs)
         updatecheats()
+    End Sub
+
+    Sub sendcheats()
+        Dim overwrite As Boolean = False
+        Try
+            Dim di As New DirectoryInfo(Application.StartupPath & "/json")
+            Dim ftp As New FTP("", "")
+            Dim ow = MsgBox("Do you want to overwrite existing cheats ?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation)
+
+            If ow = MsgBoxResult.Yes Then
+                overwrite = True
+            Else
+                overwrite = False
+            End If
+
+            MsgBox("PLEASE WAIT AND DON'T TOUCH THE SOFTWARE !", MsgBoxStyle.Exclamation)
+
+            For Each fi As FileInfo In di.EnumerateFiles("*.json")
+                If File.Exists("ftp://" & TextBox1.Text & ":2121/data/GoldHEN/Cheats/" & fi.Name) And overwrite = True Then
+                    ftp.UploadFile(fi.FullName, "ftp://" & TextBox1.Text & ":2121/data/GoldHEN/Cheats/" & fi.Name)
+                ElseIf File.Exists("ftp://" & TextBox1.Text & ":2121/data/GoldHEN/Cheats/" & fi.Name) And overwrite = False Then
+
+                Else
+                    ftp.UploadFile(fi.FullName, "ftp://" & TextBox1.Text & ":2121/data/GoldHEN/Cheats/" & fi.Name)
+                End If
+
+            Next
+
+            MsgBox("Cheats send !", MsgBoxStyle.Information)
+            Me.UseWaitCursor = False
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        If TextBox1.Text = "IP Here" Or TextBox1.Text = "" Then
+            MsgBox("Please enter a IP", MsgBoxStyle.Critical)
+        Else
+            My.Settings.IP = TextBox1.Text
+            Me.UseWaitCursor = True
+            sendcheats()
+        End If
     End Sub
 End Class
