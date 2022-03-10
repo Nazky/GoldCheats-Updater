@@ -1,0 +1,15 @@
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.exe.config
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.exe
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.pdb
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.xml
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\bin\Release\System.IO.Compression.ZipFile.dll
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbprojAssemblyReference.cache
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Resources.resources
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.GenerateResource.cache
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.CoreCompileInputs.cache
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.CopyComplete
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.exe
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.xml
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.pdb
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Credit.resources
+C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Main.resources
