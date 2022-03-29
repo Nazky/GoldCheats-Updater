@@ -13,3 +13,18 @@ C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\Go
 C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.pdb
 C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Credit.resources
 C:\Users\echol\source\repos\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Main.resources
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.exe.config
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.exe
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.pdb
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\bin\Release\GoldCheats-Updater.xml
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\bin\Release\System.IO.Compression.ZipFile.dll
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbprojAssemblyReference.cache
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Credit.resources
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Main.resources
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats_Updater.Resources.resources
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.GenerateResource.cache
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.CoreCompileInputs.cache
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.vbproj.CopyComplete
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.exe
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.xml
+E:\PC\Projet EC\GoldCheats-Updater\GoldCheats-Updater\obj\Release\GoldCheats-Updater.pdb

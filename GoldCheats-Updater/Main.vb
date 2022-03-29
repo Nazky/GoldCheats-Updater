@@ -17,6 +17,7 @@ Public Class Main
             updatecheats()
         Else
             Directory.CreateDirectory(Application.StartupPath & "/json")
+            Directory.CreateDirectory(Application.StartupPath & "/shn")
         End If
 
         If My.Settings.IP = "" Then
@@ -29,34 +30,65 @@ Public Class Main
         Try
             ListView1.Clear()
             Dim lvi As ListViewItem
+            Dim lvi2 As ListViewItem
             Dim di As New DirectoryInfo(Application.StartupPath & "/json")
+            Dim di2 As New DirectoryInfo(Application.StartupPath & "/shn")
             Dim myIcon As Icon
 
             ' ext/icon lookup
             Dim exts As New List(Of String)
             ImageList1.Images.Clear()
 
+
             For Each fi As FileInfo In di.EnumerateFiles("*.json*")
+                Try
+                    lvi = New ListViewItem
+                    lvi.Text = fi.Name
+                    lvi.SubItems.Add(Path.GetDirectoryName(fi.FullName))
 
-                lvi = New ListViewItem
-                lvi.Text = fi.Name
-                lvi.SubItems.Add(Path.GetDirectoryName(fi.FullName))
+                    lvi.SubItems.Add(((fi.Length / 1024)).ToString("0.00"))
+                    lvi.SubItems.Add(fi.CreationTime.ToShortDateString)
 
-                lvi.SubItems.Add(((fi.Length / 1024)).ToString("0.00"))
-                lvi.SubItems.Add(fi.CreationTime.ToShortDateString)
+                    If exts.Contains(fi.Extension) = False Then
+                        myIcon = Icon.ExtractAssociatedIcon(fi.FullName)
+                        ImageList1.Images.Add(fi.Extension, myIcon)
+                        exts.Add(fi.Extension)
+                    End If
 
-                If exts.Contains(fi.Extension) = False Then
-                    myIcon = Icon.ExtractAssociatedIcon(fi.FullName)
-                    ImageList1.Images.Add(fi.Extension, myIcon)
-                    exts.Add(fi.Extension)
-                End If
+                    lvi.ImageKey = fi.Extension
+                    ListView1.Items.Add(lvi)
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical)
+                End Try
 
-                lvi.ImageKey = fi.Extension
-                ListView1.Items.Add(lvi)
+            Next
+
+            For Each fi2 As FileInfo In di2.EnumerateFiles("*.shn*")
+                Try
+                    lvi2 = New ListViewItem
+                    lvi2.Text = fi2.Name
+                    lvi2.SubItems.Add(Path.GetDirectoryName(fi2.FullName))
+
+                    lvi2.SubItems.Add(((fi2.Length / 1024)).ToString("0.00"))
+                    lvi2.SubItems.Add(fi2.CreationTime.ToShortDateString)
+
+                    If exts.Contains(fi2.Extension) = False Then
+                        myIcon = Icon.ExtractAssociatedIcon(fi2.FullName)
+                        ImageList1.Images.Add(fi2.Extension, myIcon)
+                        exts.Add(fi2.Extension)
+                    End If
+
+                    lvi2.ImageKey = fi2.Extension
+                    ListView1.Items.Add(lvi2)
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical)
+                End Try
+
             Next
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
+
 
     End Sub
 
@@ -84,21 +116,23 @@ Public Class Main
         'MsgBox("Download Complete", MsgBoxStyle.Information)
         Button2.Text = "Update all cheats"
         Button2.Enabled = True
-        extract(Application.StartupPath & "/kmeps4.zip", Application.StartupPath & "/kmeps4")
+        extract(Application.StartupPath & "/GoldCheats.zip", Application.StartupPath & "/GoldCheats")
+        Me.UseWaitCursor = False
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
-            If File.Exists(Application.StartupPath & "/kmeps4.zip") Then
-                File.Delete(Application.StartupPath & "/kmeps4.zip")
+            If File.Exists(Application.StartupPath & "/GoldCheats.zip") Then
+                File.Delete(Application.StartupPath & "/GoldCheats.zip")
             End If
 
-            ProgressBar1.Visible = True
-            Label1.Visible = True
+            'ProgressBar1.Visible = True
+            Me.UseWaitCursor = True
+            'Label1.Visible = True
             Dim client As WebClient = New WebClient
             AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
             AddHandler client.DownloadFileCompleted, AddressOf client_DownloadCompleted
-            client.DownloadFileAsync(New Uri("https://github.com/kmeps4/Cheats_Repo/raw/main/cheats.zip"), Application.StartupPath & "/kmeps4.zip")
+            client.DownloadFileAsync(New Uri("https://github.com/GoldHEN/GoldHEN_Cheat_Repository/archive/refs/heads/main.zip"), Application.StartupPath & "/GoldCheats.zip")
             Button2.Text = "Download in Progress"
             Button2.Enabled = False
         Catch ex As Exception
@@ -115,15 +149,20 @@ Public Class Main
             End If
             ZipFile.ExtractToDirectory(file, path)
 
-            Dim di As New DirectoryInfo(Application.StartupPath & "/kmeps4/json")
+            Dim di As New DirectoryInfo(Application.StartupPath & "/GoldCheats/GoldHEN_Cheat_Repository-main/json")
+            Dim di2 As New DirectoryInfo(Application.StartupPath & "/GoldCheats/GoldHEN_Cheat_Repository-main/shn")
 
             For Each fi As FileInfo In di.EnumerateFiles("*.json")
                 System.IO.File.Copy(fi.FullName, Application.StartupPath & "\json\" & fi.Name, True)
             Next
 
-            Directory.Delete(Application.StartupPath & "/kmeps4", True)
-            System.IO.File.Delete(Application.StartupPath & "/kmeps4.zip")
-            System.IO.File.Delete(Application.StartupPath & "/json/list.json")
+
+            For Each fi2 As FileInfo In di2.EnumerateFiles("*.shn")
+                System.IO.File.Copy(fi2.FullName, Application.StartupPath & "\shn\" & fi2.Name, True)
+            Next
+
+            Directory.Delete(Application.StartupPath & "/GoldCheats", True)
+            System.IO.File.Delete(Application.StartupPath & "/GoldCheats.zip")
             updatecheats()
 
             ProgressBar1.Visible = False
@@ -140,9 +179,14 @@ Public Class Main
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             Dim di As New DirectoryInfo(Application.StartupPath & "/json")
+            Dim di2 As New DirectoryInfo(Application.StartupPath & "/shn")
 
             For Each fi As FileInfo In di.EnumerateFiles("*.json")
                 System.IO.File.Delete(Application.StartupPath & "\json\" & fi.Name)
+            Next
+
+            For Each fi2 As FileInfo In di.EnumerateFiles("*.shn")
+                System.IO.File.Delete(Application.StartupPath & "\shn\" & fi2.Name)
             Next
 
             updatecheats()
@@ -161,6 +205,8 @@ Public Class Main
         Dim overwrite As Boolean = False
         Try
             Dim di As New DirectoryInfo(Application.StartupPath & "/json")
+            Dim di2 As New DirectoryInfo(Application.StartupPath & "/shn")
+
             Dim ftp As New FTP("", "")
             Dim ow = MsgBox("Do you want to overwrite existing cheats ?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation)
 
@@ -179,6 +225,17 @@ Public Class Main
 
                 Else
                     ftp.UploadFile(fi.FullName, "ftp://" & TextBox1.Text & ":2121/data/GoldHEN/cheats/json/" & fi.Name)
+                End If
+
+            Next
+
+            For Each fi2 As FileInfo In di2.EnumerateFiles("*.shn")
+                If File.Exists("ftp://" & TextBox1.Text & ":2121/data/GoldHEN/cheats/shn/" & fi2.Name) And overwrite = True Then
+                    ftp.UploadFile(fi2.FullName, "ftp://" & TextBox1.Text & ":2121/data/GoldHEN/cheats/shn/" & fi2.Name)
+                ElseIf File.Exists("ftp://" & TextBox1.Text & ":2121/data/GoldHEN/cheats/shn/" & fi2.Name) And overwrite = False Then
+
+                Else
+                    ftp.UploadFile(fi2.FullName, "ftp://" & TextBox1.Text & ":2121/data/GoldHEN/cheats/shn/" & fi2.Name)
                 End If
 
             Next
